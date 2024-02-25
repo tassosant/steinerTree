@@ -20,7 +20,7 @@ public class Graph {
         this.verticesNum = 12;
         initProperties();
         generateGraph();
-//        applyKruskal();
+        applyKruskal();
     }
 
     private void initProperties(){
@@ -172,11 +172,12 @@ public class Graph {
 
     private void applyKruskal(){
         this.graphEdges.forEach((edge)->{
-                int source = edge.getSource();
-                int destination = edge.getDestination();
+                int source = edge.getSource()-1;
+                int destination = edge.getDestination()-1;
                 if(this.disjointSets.find(source)!=this.disjointSets.find(destination)){
                     this.disjointSets.union(source,destination);
                     this.minimumSpanningTree.add(edge);
+                    System.out.println("Edge added");
                 }else{
                     System.out.println("This performs a cycle");
                 }

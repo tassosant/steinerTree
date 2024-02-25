@@ -36,7 +36,7 @@ public class DisjointSets {
             parent[yRoot] = xRoot;
         } else {
             parent[yRoot] = xRoot;
-            rank[xRoot] = rank[xRoot] + 1;
+            rank[xRoot]++;
         }
     }
 }
