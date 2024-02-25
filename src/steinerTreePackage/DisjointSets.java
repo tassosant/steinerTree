@@ -1,4 +1,4 @@
-package kruskalByTasos;
+package steinerTreePackage;
 
 public class DisjointSets {
     private int vertices;

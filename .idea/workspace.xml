@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="534844cc-c3cd-4dd1-b107-49806bb9028d" name="Changes" comment="Generated Graph&#10;Apply kruskal is disabled, not completed yet">
+    <list default="true" id="534844cc-c3cd-4dd1-b107-49806bb9028d" name="Changes" comment="Kruskal debugged and enabled">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kruskalByTasos/DisjointSets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kruskalByTasos/DisjointSets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kruskalByTasos/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kruskalByTasos/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Edge.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/KruskalAlgorithm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/KruskalAlgorithmTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KruskalAlgorithmTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kruskalByTasos/DisjointSets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/DisjointSets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kruskalByTasos/Edge2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/Edge2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kruskalByTasos/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kruskalByTasos/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/Node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +77,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.KruskalAlgorithmTest.applyKruskalTestTasos">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="steinerTree" />
@@ -99,6 +105,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="KruskalAlgorithmTest.applyKruskalTestTasos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="steinerTree" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="KruskalAlgorithmTest" />
+      <option name="METHOD_NAME" value="applyKruskalTestTasos" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="KruskalAlgorithmTest.formsCircleTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="steinerTree" />
       <option name="PACKAGE_NAME" value="" />
@@ -109,23 +125,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="KruskalAlgorithmTest.formsCircleTest2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="steinerTree" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="KruskalAlgorithmTest" />
-      <option name="METHOD_NAME" value="formsCircleTest2" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.KruskalAlgorithmTest.applyKruskalTestTasos" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.KruskalAlgorithmTest.applyKruskalTest2" />
         <item itemvalue="JUnit.KruskalAlgorithmTest.applyKruskalTest1" />
         <item itemvalue="JUnit.KruskalAlgorithmTest.formsCircleTest1" />
-        <item itemvalue="JUnit.KruskalAlgorithmTest.formsCircleTest2" />
       </list>
     </recent_temporary>
   </component>
@@ -145,7 +151,7 @@
       <workItem from="1708621360978" duration="16248000" />
       <workItem from="1708722443106" duration="634000" />
       <workItem from="1708792806832" duration="7555000" />
-      <workItem from="1708878470919" duration="3472000" />
+      <workItem from="1708878470919" duration="8660000" />
     </task>
     <task id="LOCAL-00001" summary="Generated Graph&#10;Apply kruskal is disabled, not completed yet">
       <created>1708817911248</created>
@@ -154,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708817911248</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Kruskal debugged and enabled">
+      <created>1708887410394</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708887410394</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,17 +175,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Generated Graph&#10;Apply kruskal is disabled, not completed yet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Generated Graph&#10;Apply kruskal is disabled, not completed yet" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/kruskalByTasos/DisjointSets.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Kruskal debugged and enabled" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kruskal debugged and enabled" />
   </component>
 </project>

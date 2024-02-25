@@ -1,8 +1,8 @@
-package kruskalByTasos;
+package steinerTreePackage;
 import java.util.List;
 
 public class Node {
-    private List<Edge2> edges;
+    private List<Edge> edges;
 
 
 
@@ -13,7 +13,7 @@ public class Node {
         V = v;
     }
 
-    public Node(List<Edge2> edges, int v) {
+    public Node(List<Edge> edges, int v) {
         this.edges = edges;
         V = v;
     }
@@ -21,11 +21,11 @@ public class Node {
     public Node() {
     }
 
-    public List<Edge2> getEdges() {
+    public List<Edge> getEdges() {
         return edges;
     }
 
-    public void setEdges(List<Edge2> edges) {
+    public void setEdges(List<Edge> edges) {
         this.edges = edges;
     }
 
@@ -37,7 +37,7 @@ public class Node {
         V = v;
     }
 
-    public void addEdge(Edge2 edge2){
-        this.edges.add(edge2);
+    public void addEdge(Edge edge){
+        this.edges.add(edge);
     }
 }

@@ -1,20 +1,20 @@
-package kruskalByTasos;
+package steinerTreePackage;
 
-public class Edge2 implements Comparable<Edge2>{
+public class Edge implements Comparable<Edge>{
     private int source;
     private int destination;
     private int weight;
 
-    public Edge2() {
+    public Edge() {
     }
 
-    public Edge2(int source, int destination, int weight) {
+    public Edge(int source, int destination, int weight) {
         this.source = source;
         this.destination = destination;
         this.weight = weight;
     }
 
-    public Edge2(int source, int destination) {
+    public Edge(int source, int destination) {
         this.source = source;
         this.destination = destination;
     }
@@ -49,16 +49,16 @@ public class Edge2 implements Comparable<Edge2>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Edge2 edge2 = (Edge2) o;
+        Edge edge = (Edge) o;
 
         // Check if source-destination or destination-source are equal
-        return (source == edge2.source && destination == edge2.destination) ||
-                (source==edge2.destination && destination == edge2.source);
+        return (source == edge.source && destination == edge.destination) ||
+                (source== edge.destination && destination == edge.source);
     }
 
 
     @Override
-    public int compareTo(Edge2 edge) {
+    public int compareTo(Edge edge) {
         return this.weight-edge.getWeight();
     }
 }

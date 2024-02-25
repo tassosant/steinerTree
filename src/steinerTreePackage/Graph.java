@@ -1,14 +1,14 @@
-package kruskalByTasos;
+package steinerTreePackage;
 
 import java.util.*;
 
 public class Graph {
 
-    private List<Edge2> graphEdges;
+    private List<Edge> graphEdges;
     private List<Integer> nodes;
     private List<Integer> steinerNodes;
 
-    private List<Edge2> minimumSpanningTree;
+    private List<Edge> minimumSpanningTree;
 
     private DisjointSets disjointSets;
 
@@ -16,11 +16,15 @@ public class Graph {
 
     private int verticesNum;
 
-    public Graph() {
-        this.verticesNum = 12;
+    public Graph(int vertices) {
+        this.verticesNum = vertices;
         initProperties();
         generateGraph();
-        applyKruskal();
+        this.minimumSpanningTree = applyKruskal(this.graphEdges,this.disjointSets);
+        printEdgesWithWeights(this.minimumSpanningTree);
+    }
+
+    public Graph() {
     }
 
     private void initProperties(){
@@ -41,6 +45,7 @@ public class Graph {
 //        generateRandomEdges(1,(this.verticesNum*(this.verticesNum-1))/2,1);
 //        Collections.sort(this.steinerNodes, Comparator.comparingInt(Node::getV));
         Collections.sort(this.graphEdges);
+        printEdgesWithWeights(this.graphEdges);
         //70% must be steiner nodes
         //generate edges
     }
@@ -104,8 +109,8 @@ public class Graph {
         while (source<=this.nodes.size()-1){
             int destination = source+1;
             while (destination<=this.nodes.size()) {
-                Edge2 edge2 = generateEdge(source, destination);
-                this.graphEdges.add(edge2);
+                Edge edge = generateEdge(source, destination);
+                this.graphEdges.add(edge);
                 destination++;
             }
             source++;
@@ -123,14 +128,14 @@ public class Graph {
         int edgesCreated = 0;
         List<Integer> destinations = new ArrayList<>();
         while (edgesCreated<edges) {
-            Edge2 edge2;
+            Edge edge;
             int destination = generateRandomInRangeExceptForOne(min, this.nodes.size(), source);
             while (destinations.contains(destination) || destination<source){
                 destination = generateRandomInRangeExceptForOne(min, this.nodes.size(), source);
                 System.out.println("I am in loop");
             }
-            edge2 = generateEdge(source, destination);
-            this.graphEdges.add(edge2);
+            edge = generateEdge(source, destination);
+            this.graphEdges.add(edge);
             destinations.add(destination);
             edgesCreated++;
         }
@@ -140,8 +145,8 @@ public class Graph {
         //check if source or destination are not exceeding the number of edges
     }
 
-    private Edge2 generateEdge(int source, int destination){
-        Edge2 edge = new Edge2(source,destination);
+    private Edge generateEdge(int source, int destination){
+        Edge edge = new Edge(source,destination);
         edge.setWeight(generateRandomInRange(0,50));
         //source.addEdge(edge);
         //destination.addEdge(edge);
@@ -156,7 +161,7 @@ public class Graph {
         System.out.println();
     }
 
-    private void printList(List<Edge2> list){
+    private void printList(List<Edge> list){
 
         list.forEach((localNode)->{
             System.out.print(String.format("(%d,%d)\t",localNode.getSource(),localNode.getDestination()));
@@ -170,18 +175,34 @@ public class Graph {
 
     }
 
-    private void applyKruskal(){
-        this.graphEdges.forEach((edge)->{
-                int source = edge.getSource()-1;
-                int destination = edge.getDestination()-1;
-                if(this.disjointSets.find(source)!=this.disjointSets.find(destination)){
-                    this.disjointSets.union(source,destination);
-                    this.minimumSpanningTree.add(edge);
-                    System.out.println("Edge added");
+    public List<Edge> applyKruskal(List<Edge> edgesList, DisjointSets disjointSets){
+        List<Edge> minimumSpanningTree = new ArrayList<>();
+        edgesList.forEach((edge)->{
+                //int source = edge.getSource()-1; //index for parent array and rank array
+                //int destination = edge.getDestination()-1; //index
+                int source = edge.getSource()-1; //index for parent array and rank array
+                int destination = edge.getDestination()-1; //index
+                if(disjointSets.find(source)!=disjointSets.find(destination)){
+                    disjointSets.union(source,destination);
+                    minimumSpanningTree.add(edge);
+//                    System.out.println("Edge added");
                 }else{
-                    System.out.println("This performs a cycle");
+//                    System.out.println("This performs a cycle");
                 }
         });
+        return minimumSpanningTree;
+
+    }
+
+    private void printEdgesWithWeights(List<Edge> edgesList){
+
+        System.out.println(String.format("source\t|\tdestination\t|\tweight"));
+        System.out.println("-----------------------------------");
+
+        edgesList.forEach((edge -> {
+            System.out.println(String.format("%d\t\t|\t\t%d\t\t|\t%d", edge.getSource(), edge.getDestination(), edge.getWeight()));
+        }));
+        System.out.println("-----------------------------------");
     }
 
 
