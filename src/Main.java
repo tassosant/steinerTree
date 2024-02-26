@@ -6,9 +6,11 @@ import steinerTreePackage.SteinerTree;
 public class Main {
     public static void main(String[] args) {
 
-        Graph graph = new Graph(12);
+        Graph graph = new Graph(6);
 
-        SteinerTree steinerTree = new SteinerTree(graph.getDisjointSets().getParent()[0]+1,graph.getSteinerNodes(),graph.getSteinerNodes(),graph.getMinimumSpanningTree());
+        SteinerTree steinerTree = new SteinerTree(graph.getDisjointSets().getParent()[0],graph.getNodes(),graph.getSteinerNodes(),graph.getMinimumSpanningTree());
+
+
 
 //        Edge2<Integer, Integer> edge1 = new Edge2<>(1, 3, 10);
 //        Edge2<Integer, Integer> edge2 = new Edge2<>(3, 1, 20);

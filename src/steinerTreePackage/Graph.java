@@ -31,6 +31,7 @@ public class Graph {
     }
 
     public Graph() {
+
     }
 
     private void initProperties(){
@@ -96,7 +97,7 @@ public class Graph {
     //6     x
     //x=percentage*6/100
 
-    private void pickRandomlySteinerNodes(int min,int max){
+    public void pickRandomlySteinerNodes(int min,int max){
         int node = generateRandomInRange(min,max);
         if(this.steinerNodes.size()+1<=(70*this.nodes.size())/100) {
             this.steinerNodes.add(this.nodes.get(node-1));
@@ -184,29 +185,21 @@ public class Graph {
 
     public List<Edge> applyKruskal(List<Edge> edgesList, DisjointSets disjointSets){
         List<Edge> minimumSpanningTree = new ArrayList<>();
-        Map<Integer,Node> nodeMap = new TreeMap<>();
+
         edgesList.forEach((edge)->{
-                //int source = edge.getSource()-1; //index for parent array and rank array
-                //int destination = edge.getDestination()-1; //index
+
                 int source = edge.getSource()-1; //index for parent array and rank array
                 int destination = edge.getDestination()-1; //index
                 if(disjointSets.find(source)!=disjointSets.find(destination)){
                     disjointSets.union(source,destination);
                     minimumSpanningTree.add(edge);
 
-                    nodeMap.putIfAbsent(source+1,new Node(source+1));
-                    nodeMap.putIfAbsent(destination+1,new Node(destination+1));
-//                    System.out.println("Edge added");
 
-                    nodeMap.get(source+1).addChildNode(nodeMap.get(destination+1));
-//                    nodeMap.get(destination+1).addChildNode(nodeMap.get(source+1));
                 }else{
 //                    System.out.println("This performs a cycle");
                 }
         });
-        nodeMap.forEach((id, node) -> {
-            System.out.println(node);
-        });
+
 
 
         return minimumSpanningTree;
@@ -225,7 +218,7 @@ public class Graph {
     }
 
     public List<Integer> getNodes() {
-        return nodes;
+        return this.nodes;
     }
 
     public List<Integer> getSteinerNodes() {
@@ -238,5 +231,29 @@ public class Graph {
 
     public DisjointSets getDisjointSets() {
         return disjointSets;
+    }
+
+    public void setVerticesNum(int verticesNum) {
+        this.verticesNum = verticesNum;
+    }
+
+    public void setDisjointSets(DisjointSets disjointSets) {
+        this.disjointSets = disjointSets;
+    }
+
+    public void setNodes(List<Integer> nodes){
+        this.nodes = nodes;
+    }
+
+    public int getSteinerNodesNum() {
+        return steinerNodesNum;
+    }
+
+    public void setSteinerNodesNum(int steinerNodesNum) {
+        this.steinerNodesNum = steinerNodesNum;
+    }
+
+    public void setSteinerNodes(List<Integer> steinerNodes) {
+        this.steinerNodes = steinerNodes;
     }
 }

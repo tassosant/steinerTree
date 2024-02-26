@@ -9,7 +9,11 @@ public class Node implements Comparator<Node>,Comparable<Node> {
 
     private List<Node> children;
 
+    private List<Node> connectedNodes;
+
     private Node parent;
+
+    private boolean isRoot;
 
 
     //number of vertice
@@ -41,6 +45,7 @@ public class Node implements Comparator<Node>,Comparable<Node> {
 
     private void initProperties(){
         this.children = new ArrayList<>();
+        this.connectedNodes = new ArrayList<>();
     }
 
     public List<Edge> getEdges() {
@@ -67,11 +72,11 @@ public class Node implements Comparator<Node>,Comparable<Node> {
         return parent;
     }
 
-    public void setParent(Node parent) {
+    public void addParent(Node parent) {
         this.parent = parent;
     }
 
-    public void setParent(int V){
+    public void addParent(int V){
         this.parent = new Node(V);
     }
 
@@ -91,6 +96,20 @@ public class Node implements Comparator<Node>,Comparable<Node> {
         this.children.add(node);
     }
 
+    public void removeParent(){
+        this.parent = null;
+    }
+
+    public void addConnectionWithVerticeNumber(int num){
+        this.connectedNodes.add(new Node(num));
+    }
+    public void addConnection(Node node){
+        this.connectedNodes.add(node);
+    }
+
+    public List<Node> getConnectedNodes() {
+        return connectedNodes;
+    }
 
     // Method 1
     @Override
@@ -106,8 +125,10 @@ public class Node implements Comparator<Node>,Comparable<Node> {
         return 0;
     }
 
+
+
     public String toString() {
-        return "Node " + this.V + " -> Children: " + this.children.stream().map(n -> Integer.toString(n.getV())).collect(Collectors.joining(", "));
+        return "Node " + this.V + " -> Children: " + this.children.stream().map(n -> Integer.toString(n.getV())).collect(Collectors.joining(", "))+"\t"+"Parent: "+(this.getParent()==null?"None":this.getParent().getV());
     }
 
     @Override

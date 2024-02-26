@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="534844cc-c3cd-4dd1-b107-49806bb9028d" name="Changes" comment="Synced">
-      <change beforePath="$PROJECT_DIR$/src/steinerTreePackage/GFG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/GFG.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SteinerTreeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/steinerTreePackage/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/steinerTreePackage/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/steinerTreePackage/SteinerTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/SteinerTree.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,12 +82,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="KruskalAlgorithmTest.applyKruskalTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GFGTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="steinerTree" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="KruskalAlgorithmTest" />
-      <option name="METHOD_NAME" value="applyKruskalTest1" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="GFGTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -107,12 +111,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="KruskalAlgorithmTest.formsCircleTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SteinerTreeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="steinerTree" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="KruskalAlgorithmTest" />
-      <option name="METHOD_NAME" value="formsCircleTest1" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="SteinerTreeTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -120,10 +123,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.SteinerTreeTest" />
+        <item itemvalue="JUnit.GFGTest" />
         <item itemvalue="JUnit.KruskalAlgorithmTest.applyKruskalTestTasos" />
         <item itemvalue="JUnit.KruskalAlgorithmTest.applyKruskalTest2" />
-        <item itemvalue="JUnit.KruskalAlgorithmTest.applyKruskalTest1" />
-        <item itemvalue="JUnit.KruskalAlgorithmTest.formsCircleTest1" />
       </list>
     </recent_temporary>
   </component>
@@ -145,7 +148,7 @@
       <workItem from="1708792806832" duration="7555000" />
       <workItem from="1708878470919" duration="8660000" />
       <workItem from="1708904238848" duration="697000" />
-      <workItem from="1708928014594" duration="7440000" />
+      <workItem from="1708928014594" duration="20227000" />
     </task>
     <task id="LOCAL-00001" summary="Generated Graph&#10;Apply kruskal is disabled, not completed yet">
       <created>1708817911248</created>
@@ -168,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708935631237</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Synced">
+      <created>1708935785972</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708935785972</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,5 +189,21 @@
     <MESSAGE value="Kruskal debugged and enabled" />
     <MESSAGE value="Synced" />
     <option name="LAST_COMMIT_MESSAGE" value="Synced" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/steinerTreePackage/SteinerTree.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="nodes.get(4).edges" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

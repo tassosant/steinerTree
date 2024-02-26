@@ -3,6 +3,7 @@ package steinerTreePackage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class SteinerTree {
     private int root;
@@ -24,6 +25,9 @@ public class SteinerTree {
         initProperties();
         parseIntNodesToNodesList(this.nodesInt,this.nodes);
         parseIntNodesToNodesList(this.steinerNodesInt,this.steinerNodes);
+        mapNodes(this.MST,this.nodes);
+        makeNodesRelationship(this.nodes);
+        printTree();
     }
 
     private void initProperties(){
@@ -45,13 +49,40 @@ public class SteinerTree {
         edgeList.forEach((edge -> {
             int source = edge.getSource()-1;
             int destination = edge.getDestination()-1;
-            if(source==root){
-                nodes.get(source).addChild(destination);
-            }
-            if(destination==root){
-                nodes.get(destination).addChild(source);
-            }
+//            if(source==root){
+//                nodes.get(source).addChild(destination+1);
+//                nodes.get(destination).addParent(source+1);
+//                return;
+//            }
+//            if(destination==root){
+//                nodes.get(destination).addChild(source+1);
+//                nodes.get(source).addParent(destination+1);
+//                return;
+//            }
+//            nodes.get(destination).addParent(source+1);
+//            nodes.get(source).addChild(destination+1);
+            nodes.get(source).addConnectionWithVerticeNumber(destination+1);
+            nodes.get(destination).addConnectionWithVerticeNumber(source+1);
         }));
+
+
+    }
+
+    private void makeNodesRelationship(List<Node> nodes){
+        int root = 0; //first nodeIndex, pick randomly the index at the future
+        System.out.println("Selected root:"+(root+1));
+        makeNodeRelationship(nodes,nodes.get(root));
+
+
+    }
+
+    private void makeNodeRelationship(List<Node> nodes,Node currentNode){
+        List<Node> connectedNodes = currentNode.getConnectedNodes();
+        connectedNodes.forEach(connectedNode -> {
+            currentNode.addChild(connectedNode.getV());
+            connectedNode.addParent(currentNode.getV());
+            makeNodeRelationship(nodes,connectedNode);
+        });
     }
 
 
@@ -61,5 +92,36 @@ public class SteinerTree {
 
     public void setRoot(int root) {
         this.root = root;
+    }
+
+    private void printTree(){
+        this.nodes.forEach((System.out::println));
+    }
+
+    public List<Edge> getMST() {
+        return MST;
+    }
+
+    public void setMST(List<Edge> MST) {
+        this.MST = MST;
+    }
+
+    public List<Node> getNodes() {
+        return nodes;
+    }
+
+
+
+
+
+    public void printEdgesWithWeights(List<Edge> edgesList){
+
+        System.out.println(String.format("source\t|\tdestination\t|\tweight"));
+        System.out.println("-----------------------------------");
+
+        edgesList.forEach((edge -> {
+            System.out.println(String.format("%d\t\t|\t\t%d\t\t|\t%d", edge.getSource(), edge.getDestination(), edge.getWeight()));
+        }));
+        System.out.println("-----------------------------------");
     }
 }
