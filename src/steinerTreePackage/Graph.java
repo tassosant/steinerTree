@@ -183,6 +183,7 @@ public class Graph {
     }
 
     public List<Edge> applyKruskal(List<Edge> edgesList, DisjointSets disjointSets){
+        Collections.sort(edgesList);
         List<Edge> minimumSpanningTree = new ArrayList<>();
         Map<Integer,Node> nodeMap = new TreeMap<>();
         edgesList.forEach((edge)->{
