@@ -31,6 +31,7 @@ public class Node implements Comparator<Node>,Comparable<Node> {
         // This keyword refers to current instance itself
         this.V = V;
         this.cost = cost;
+        initProperties();
     }
 
     public Node(List<Edge> edges, int v) {
@@ -119,6 +120,14 @@ public class Node implements Comparator<Node>,Comparable<Node> {
 
     public void setConnectedNodes(List<Node> connectedNodes) {
         this.connectedNodes = connectedNodes;
+    }
+
+    public void setRoot(boolean root) {
+        isRoot = root;
+    }
+
+    public boolean isRoot() {
+        return isRoot;
     }
 
     // Method 1

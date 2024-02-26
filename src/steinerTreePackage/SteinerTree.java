@@ -29,9 +29,12 @@ public class SteinerTree {
         parseIntNodesToNodesList(this.nodesInt,this.nodes);
         parseIntNodesToNodesList(this.steinerNodesInt,this.steinerNodes);
         mapNodes(this.MST,this.nodes);
+        makeNodesRelationship(this.nodes);
+
 //        makeNodesRelationship(this.nodes);
-//        makeNodesRelationship(this.nodes);
-//        printTree();
+        printTree();
+        //cutLeaves(this.root);
+
     }
 
     public SteinerTree() {
@@ -78,24 +81,24 @@ public class SteinerTree {
 
     private void makeNodesRelationship(List<Node> nodes){
         int root = this.root; //first nodeIndex, pick randomly the index at the future
-        System.out.println("Selected root:"+(root));
+        System.out.println("Selected root:"+(root+1));
         makeNodeRelationship(nodes, nodes.get(root),new HashSet<>(),root);
 
 
     }
 
-    private void makeNodeRelationship(List<Node>nodes, Node currentNode, Set<Integer> visited, int root){
-        if (visited.contains(currentNode.getV())) return;
-        visited.add(currentNode.getV());
+    private void makeNodeRelationship(List<Node>nodes, Node parentNode, Set<Integer> visited, int root){
+        if (visited.contains(parentNode.getV())) return;
+        visited.add(parentNode.getV());
 
-////        currentNode.setChildren(new ArrayList<>());
-////        currentNode.setParent(null);
-//        if(currentNode==nodes.get(root)){
-//            currentNode.setParent(null);
-//            currentNode.setChildren(currentNode.getConnectedNodes());
-//            //makeNodeRelationship(nodes,currentNode.getChildren().get(0),visited,root);
+////        parentNode.setChildren(new ArrayList<>());
+////        parentNode.setParent(null);
+//        if(parentNode==nodes.get(root)){
+//            parentNode.setParent(null);
+//            parentNode.setChildren(parentNode.getConnectedNodes());
+//            //makeNodeRelationship(nodes,parentNode.getChildren().get(0),visited,root);
 //        }
-//        List<Node> childrenNodes = currentNode.getChildren();
+//        List<Node> childrenNodes = parentNode.getChildren();
 //            childrenNodes.forEach(childNode -> {
 //                Node node = new Node();
 //                node.setV(childNode.getV());
@@ -105,16 +108,16 @@ public class SteinerTree {
 //                    node.setParent(null);
 //                }
 //                if (childNode.getParent() == null && childNode != nodes.get(root)) {
-////                    childNode.addParent(currentNode);
-////                    currentNode.addChildNode(childNode);
-//                    node.addParent(currentNode);
+////                    childNode.addParent(parentNode);
+////                    parentNode.addChildNode(childNode);
+//                    node.addParent(parentNode);
 //                    node.addChildNode(childNode);
 //
 //
 //                }
-//                if (currentNode.getParent() != null) {
-//                    if (currentNode.getParent().getV() != childNode.getV()) {
-////                        currentNode.addChildNode(childNode);
+//                if (parentNode.getParent() != null) {
+//                    if (parentNode.getParent().getV() != childNode.getV()) {
+////                        parentNode.addChildNode(childNode);
 //                        node.addChildNode(childNode);
 //                    }
 //                }
@@ -124,32 +127,57 @@ public class SteinerTree {
 //            });
 //
 //
-////        currentNode.getChildren().forEach((child)->{
+////        parentNode.getChildren().forEach((child)->{
 ////        });
         List<Node> childrenNodes;
-        if(currentNode.getV()==nodes.get(root).getV()) {
-            childrenNodes = new ArrayList<>(currentNode.getConnectedNodes()); // Copy to a temporary list
+        if(parentNode.getV()==nodes.get(root).getV()) {
+            childrenNodes = new ArrayList<>(parentNode.getConnectedNodes()); // Copy to a temporary list
+            parentNode.setParent(null);
+            parentNode.setRoot(true);
+            //parentNode.setChildren(childrenNodes);
         }else {
-            currentNode.setChildren(currentNode.getConnectedNodes());
-            childrenNodes = new ArrayList<>(currentNode.getChildren()); // Copy to a temporary list
+            if(parentNode.getChildren().size()>0) {
+                childrenNodes = new ArrayList<>(parentNode.getChildren()); // Copy to a temporary list
+            }else {
+                childrenNodes = new ArrayList<>(parentNode.getConnectedNodes());
+            }
         }
         childrenNodes.forEach((childNode)->{
-            if (!visited.contains(childNode.getV())) { // Check if the child node has not been visited
-                if (childNode.getV() != nodes.get(root).getV()) {
-                    if(childNode.getParent()!=null) {
-                        if (childNode.getParent().getV() != childNode.getV()) {
-                            childNode.setParent(currentNode); // Set parent only if it's not the root
-                            currentNode.addChildNode(childNode); // Safely add child nodes
-                        }
-                    }else{
-                        childNode.setParent(currentNode); // Set parent only if it's not the root
-                        currentNode.addChildNode(childNode); // Safely add child nodes
+            if(childNode!=null){
+
+            }
+                //check if is root
+                if(parentNode.isRoot()){
+                    parentNode.setParent(null);
+                    childNode.setParent(parentNode);
+                    parentNode.addChildNode(childNode);
+
+                }else {
+                    //if not root
+                    //if parent not null
+                    if (parentNode.getParent() != null) {
+
+                        //if parent of current node is not the same as this child
+                        if (parentNode.getV() != childNode.getV() && parentNode.getParent().getV()!=childNode.getV())
+
+                            //check if parent of child is not this child
+                            if(childNode.getParent()!=childNode ) {
+                                childNode.setParent(parentNode);
+                                parentNode.addChildNode(childNode);
+                            }
+                    //if parent null
+                    } else {
+
+                            childNode.setParent(parentNode);
+                            parentNode.addChildNode(childNode);
+
                     }
                 }
-                makeNodeRelationship(nodes, childNode, visited, root); // Recurse for child node
-            }
+
+                makeNodeRelationship(nodes,childNode,visited,root);
             }
         );
+
 
 
 
@@ -166,7 +194,9 @@ public class SteinerTree {
     }
 
     public void printTree(){
+        System.out.println("--------------------");
         this.nodes.forEach((System.out::println));
+        System.out.println("#######################");
     }
 
     public List<Edge> getMST() {
@@ -194,5 +224,49 @@ public class SteinerTree {
             System.out.println(String.format("%d\t\t|\t\t%d\t\t|\t%d", edge.getSource(), edge.getDestination(), edge.getWeight()));
         }));
         System.out.println("-----------------------------------");
+    }
+
+    public void cutLeaves(int root){
+        cutLeave(this.nodes.get(root));
+    }
+
+    private void cutLeave(Node node){
+        if(node==null){
+            return;
+        }
+        ArrayList<Integer> steinerNodes= new ArrayList<>(9);
+        steinerNodes.add(1);
+        steinerNodes.add(2);
+        steinerNodes.add(3);
+        steinerNodes.add(4);
+        steinerNodes.add(0);
+        steinerNodes.add(0);
+        steinerNodes.add(0);
+        steinerNodes.add(0);
+        steinerNodes.add(0);
+
+        if(node.getChildren()==null || node.getChildren().size()==0){
+            if(node.getV()!=steinerNodes.get(node.getV()-1)){
+//                List<Node> nodeSParentChildren = node.getParent().getChildren();
+//                nodeSParentChildren.removeIf(tempNode->tempNode.getV()==node.getV());
+//                node.getParent().setChildren(nodeSParentChildren);
+                Node parent = node.getParent();
+                node.setParent(null);
+                if(!node.isRoot()) {
+                    cutLeave(parent);
+                }
+            }
+        }else{
+            List<Node> children = node.getChildren();
+            List<Node> childrenTemp = new ArrayList<>(children);
+            childrenTemp.forEach((child)->{
+                if(child.getParent()==null){
+                    children.removeIf((temp)->temp.getV() == child.getV());
+                }else{
+                    cutLeave(child);
+                }
+            });
+        }
+
     }
 }

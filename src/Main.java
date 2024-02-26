@@ -16,6 +16,7 @@ public class Main {
         }
         graph.printAdj();
 
+
         List<Integer> source = graph.getSteinerNodes();
         source.forEach(System.err::println);
         GFG gfg = new GFG();
@@ -25,6 +26,9 @@ public class Main {
 
 
        // SteinerTree steinerTree = new SteinerTree(graph.getDisjointSets().getParent()[0],graph.getNodes(),graph.getSteinerNodes(),graph.getMinimumSpanningTree());
+
+        SteinerTree steinerTree = new SteinerTree(3,graph.getNodes(),graph.getSteinerNodes(),graph.getMinimumSpanningTree());
+
 
 
 

@@ -116,11 +116,19 @@ public class SteinerTreeTest {
         Graph graph1 = new Graph();
         graph1.setVerticesNum(nodes.size());
         graph1.setNodes(nodes);
-        graph1.setSteinerNodes(new ArrayList<>());
+        List<Integer> steinerInt = new ArrayList<>();
+        steinerInt.add(1);
+        steinerInt.add(2);
+        steinerInt.add(3);
+        steinerInt.add(4);
+        graph1.setSteinerNodes(steinerInt);
         graph1.setDisjointSets(new DisjointSets(nodes.size()));
         graph1.pickRandomlySteinerNodes(1,nodes.size());
         SteinerTree steinerTree = new SteinerTree(1,nodes,graph1.getSteinerNodes(),graph);
+        //List<Node> nodes1 = steinerTree.getNodes();
+        steinerTree.cutLeaves(0);
         steinerTree.printTree();
+        //steinerTree.printTree();
 
     }
 
