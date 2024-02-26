@@ -50,7 +50,7 @@ public class GFG {
 
             // Removing the minimum distance node
             // from the priority queue
-            int u = pq.remove().node;
+            int u = pq.remove().getV();
 
             // Adding the node whose distance is
             // finalized
@@ -82,16 +82,16 @@ public class GFG {
             Node v = adj.get(u).get(i);
 
             // If current node hasn't already been processed
-            if (!settled.contains(v.node)) {
+            if (!settled.contains(v.getV())) {
                 edgeDistance = v.cost;
                 newDistance = dist[u] + edgeDistance;
 
                 // If new distance is cheaper in cost
-                if (newDistance < dist[v.node])
-                    dist[v.node] = newDistance;
+                if (newDistance < dist[v.getV()])
+                    dist[v.getV()] = newDistance;
 
                 // Add the current node to the queue
-                pq.add(new Node(v.node, dist[v.node]));
+                pq.add(new Node(v.getV(), dist[v.getV()]));
             }
         }
     }

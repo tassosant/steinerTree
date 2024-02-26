@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="534844cc-c3cd-4dd1-b107-49806bb9028d" name="Changes" comment="Kruskal debugged and enabled">
-      <change afterPath="$PROJECT_DIR$/src/steinerTreePackage/SteinerTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/steinerTreePackage/DisjointSets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/DisjointSets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/steinerTreePackage/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/steinerTreePackage/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/Node.java" afterDir="false" />
+    <list default="true" id="534844cc-c3cd-4dd1-b107-49806bb9028d" name="Changes" comment="Synced">
+      <change beforePath="$PROJECT_DIR$/src/steinerTreePackage/GFG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/GFG.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +145,7 @@
       <workItem from="1708792806832" duration="7555000" />
       <workItem from="1708878470919" duration="8660000" />
       <workItem from="1708904238848" duration="697000" />
-      <workItem from="1708928014594" duration="7175000" />
+      <workItem from="1708928014594" duration="7440000" />
     </task>
     <task id="LOCAL-00001" summary="Generated Graph&#10;Apply kruskal is disabled, not completed yet">
       <created>1708817911248</created>
@@ -166,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708887410394</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Synced">
+      <created>1708935631237</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708935631237</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +177,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Generated Graph&#10;Apply kruskal is disabled, not completed yet" />
     <MESSAGE value="Kruskal debugged and enabled" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kruskal debugged and enabled" />
+    <MESSAGE value="Synced" />
+    <option name="LAST_COMMIT_MESSAGE" value="Synced" />
   </component>
 </project>
