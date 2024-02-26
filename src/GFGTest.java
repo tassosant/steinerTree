@@ -6,6 +6,7 @@ import steinerTreePackage.Node;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class GFGTest {
 
@@ -102,6 +103,8 @@ public class GFGTest {
         expected.add(new Edge(2,3, 4));
 
         Assertions.assertEquals( expected, actual);
+
+        gfg.getShortestPaths();
 
     }
 

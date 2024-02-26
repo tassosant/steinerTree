@@ -13,6 +13,12 @@ public class GFG {
     private int V;
     List<List<Node>> adj;
 
+//    public List<Integer> prev = new ArrayList<>();
+int[] prev;
+
+    List<Edge> calculatedEdges = null;
+
+    Map<Edge, List<Integer>> shortestPaths = new HashMap<>();
     // Constructor of this class
     public GFG(int V)
     {
@@ -96,6 +102,10 @@ public class GFG {
         }
     }
 
+    public Map<Edge, List<Integer>> getShortestPaths() {
+        return shortestPaths;
+    }
+
     // Main driver method
 //    public List<Edge> calculate(Graph graph, int V, List<Integer> source)
     public List<Edge> calculate(List<List<Node>> adj, int V, List<Integer> source)
@@ -105,19 +115,26 @@ public class GFG {
         for (int k : source) {
             // Calculating the single source the shortest path
             GFG dpq = new GFG(V);
-            dpq.dijkstra(adj, k);
+
+//            dpq.dijkstra(adj, k);
+//            GFG dpq2 = new GFG(V);
+
 
             // Printing the shortest path to all the nodes
             // from the source node
             System.out.println("The shorted path from node "+k+":");
 
             for (int steinerNode : source) {
+                List<Integer> path = dpq.dijkstra2(adj, k, steinerNode);
                 Edge edge = new Edge(k,steinerNode,dpq.dist[steinerNode]);
                 System.out.println(k + " to " + steinerNode + " is "
                         + dpq.dist[steinerNode]);
+
                 System.out.println(edge.toString());
                 edges= addUniqueEdges(edges, edge);
-
+//                List<Integer> path = dpq2.dijkstra2(adj, k, steinerNode);
+                System.out.println(path.toString());
+                shortestPaths.put(edge, path);
             }
         }
         return edges;
@@ -135,6 +152,57 @@ public class GFG {
        edges.add(edge);
        return edges;
     }
+
+
+    public List<Integer> dijkstra2(List<List<Node> > adj, int src, int target) {
+        this.adj = adj;
+        dist = new int[V];
+        prev = new int[V];
+        settled.clear();
+
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        Arrays.fill(prev, -1); // Initialize prev array with -1
+
+        PriorityQueue<Node> pq = new PriorityQueue<>(V, Comparator.comparingInt(node -> node.cost));
+        pq.add(new Node(src, 0));
+
+        dist[src] = 0;
+
+        while (!pq.isEmpty()) {
+            int u = pq.poll().getV();
+
+            if (u == target) {
+                return constructPath(src, target);
+            }
+
+            settled.add(u);
+
+            for (Node neighbor : adj.get(u)) {
+                int v = neighbor.getV();
+                int edgeCost = neighbor.cost;
+
+                if (!settled.contains(v) && dist[u] != Integer.MAX_VALUE && dist[u] + edgeCost < dist[v]) {
+                    dist[v] = dist[u] + edgeCost;
+                    prev[v] = u; // Update previous node for vertex v
+                    pq.add(new Node(v, dist[v]));
+                }
+            }
+        }
+
+        return new ArrayList<>(); // If target is not reachable, return an empty path
+
+    }
+
+    // Helper method to construct the shortest path
+    private List<Integer> constructPath(int src, int target) {
+        List<Integer> path = new ArrayList<>();
+        for (int at = target; at != -1; at = prev[at]) {
+            path.add(at);
+        }
+        Collections.reverse(path);
+        return path;
+    }
+
 
 
 }
