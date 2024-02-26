@@ -103,6 +103,8 @@ public class Node implements Comparator<Node>,Comparable<Node> {
     public void addConnectionWithVerticeNumber(int num){
         this.connectedNodes.add(new Node(num));
     }
+
+
     public void addConnection(Node node){
         this.connectedNodes.add(node);
     }
@@ -113,6 +115,10 @@ public class Node implements Comparator<Node>,Comparable<Node> {
 
     public void setParent(Node parent) {
         this.parent = parent;
+    }
+
+    public void setConnectedNodes(List<Node> connectedNodes) {
+        this.connectedNodes = connectedNodes;
     }
 
     // Method 1

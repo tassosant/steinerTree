@@ -1,8 +1,6 @@
 package steinerTreePackage;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class SteinerTree {
@@ -17,8 +15,13 @@ public class SteinerTree {
     private List<Node> nodes;
     private List<Node> steinerNodes;
 
-    public SteinerTree(int root,List<Integer> nodes,List<Integer> steinerNodes,List<Edge> MST) {
-        this.root = root;
+    public SteinerTree(
+            int root,
+            List<Integer> nodes,
+            List<Integer> steinerNodes,
+            List<Edge> MST
+    ) {
+        this.root = root-1;
         this.nodesInt = nodes;
         this.steinerNodesInt = steinerNodes;
         this.MST = MST;
@@ -26,8 +29,13 @@ public class SteinerTree {
         parseIntNodesToNodesList(this.nodesInt,this.nodes);
         parseIntNodesToNodesList(this.steinerNodesInt,this.steinerNodes);
         mapNodes(this.MST,this.nodes);
-        makeNodesRelationship(this.nodes);
+//        makeNodesRelationship(this.nodes);
+//        makeNodesRelationship(this.nodes);
 //        printTree();
+    }
+
+    public SteinerTree() {
+
     }
 
     private void initProperties(){
@@ -61,30 +69,88 @@ public class SteinerTree {
 //            }
 //            nodes.get(destination).addParent(source+1);
 //            nodes.get(source).addChild(destination+1);
-            nodes.get(source).addConnectionWithVerticeNumber(destination+1);
-            nodes.get(destination).addConnectionWithVerticeNumber(source+1);
+            nodes.get(source).addConnection(nodes.get(destination));
+            nodes.get(destination).addConnection(nodes.get(source));
         }));
 
 
     }
 
     private void makeNodesRelationship(List<Node> nodes){
-        int root = 0; //first nodeIndex, pick randomly the index at the future
-        System.out.println("Selected root:"+(root+1));
-        makeNodeRelationship(nodes,nodes.get(root));
+        int root = this.root; //first nodeIndex, pick randomly the index at the future
+        System.out.println("Selected root:"+(root));
+        makeNodeRelationship(nodes, nodes.get(root),new HashSet<>(),root);
 
 
     }
 
-    private void makeNodeRelationship(List<Node> nodes,Node currentNode){
-        List<Node> connectedNodes = currentNode.getConnectedNodes();
-        connectedNodes.forEach(connectedNode -> {
-            connectedNode.addParent(currentNode);
-            currentNode.addChildNode(connectedNode);
-        });
-        currentNode.getChildren().forEach((child)->{
-            makeNodeRelationship(nodes,child);
-        });
+    private void makeNodeRelationship(List<Node>nodes, Node currentNode, Set<Integer> visited, int root){
+        if (visited.contains(currentNode.getV())) return;
+        visited.add(currentNode.getV());
+
+////        currentNode.setChildren(new ArrayList<>());
+////        currentNode.setParent(null);
+//        if(currentNode==nodes.get(root)){
+//            currentNode.setParent(null);
+//            currentNode.setChildren(currentNode.getConnectedNodes());
+//            //makeNodeRelationship(nodes,currentNode.getChildren().get(0),visited,root);
+//        }
+//        List<Node> childrenNodes = currentNode.getChildren();
+//            childrenNodes.forEach(childNode -> {
+//                Node node = new Node();
+//                node.setV(childNode.getV());
+//
+//                if (childNode == nodes.get(root)) {
+////                    childNode.setParent(null);
+//                    node.setParent(null);
+//                }
+//                if (childNode.getParent() == null && childNode != nodes.get(root)) {
+////                    childNode.addParent(currentNode);
+////                    currentNode.addChildNode(childNode);
+//                    node.addParent(currentNode);
+//                    node.addChildNode(childNode);
+//
+//
+//                }
+//                if (currentNode.getParent() != null) {
+//                    if (currentNode.getParent().getV() != childNode.getV()) {
+////                        currentNode.addChildNode(childNode);
+//                        node.addChildNode(childNode);
+//                    }
+//                }
+//                node.setConnectedNodes(childNode.getConnectedNodes());
+//                makeNodeRelationship(nodes, node, visited, root);
+//                childNode = node;
+//            });
+//
+//
+////        currentNode.getChildren().forEach((child)->{
+////        });
+        List<Node> childrenNodes;
+        if(currentNode.getV()==nodes.get(root).getV()) {
+            childrenNodes = new ArrayList<>(currentNode.getConnectedNodes()); // Copy to a temporary list
+        }else {
+            currentNode.setChildren(currentNode.getConnectedNodes());
+            childrenNodes = new ArrayList<>(currentNode.getChildren()); // Copy to a temporary list
+        }
+        childrenNodes.forEach((childNode)->{
+            if (!visited.contains(childNode.getV())) { // Check if the child node has not been visited
+                if (childNode.getV() != nodes.get(root).getV()) {
+                    if(childNode.getParent()!=null) {
+                        if (childNode.getParent().getV() != childNode.getV()) {
+                            childNode.setParent(currentNode); // Set parent only if it's not the root
+                            currentNode.addChildNode(childNode); // Safely add child nodes
+                        }
+                    }else{
+                        childNode.setParent(currentNode); // Set parent only if it's not the root
+                        currentNode.addChildNode(childNode); // Safely add child nodes
+                    }
+                }
+                makeNodeRelationship(nodes, childNode, visited, root); // Recurse for child node
+            }
+            }
+        );
+
 
 
 

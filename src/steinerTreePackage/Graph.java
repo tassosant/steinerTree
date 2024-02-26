@@ -8,7 +8,7 @@ public class Graph {
     private List<Edge> graphEdges;
     private List<Integer> nodes;
     private List<Integer> steinerNodes;
-
+    private List<List<Node>> neighbourNodes;
     private List<Edge> minimumSpanningTree;
 
     private DisjointSets disjointSets;
@@ -42,6 +42,7 @@ public class Graph {
         this.steinerNodes = new ArrayList<>();
         this.minimumSpanningTree = new ArrayList<>();
         this.disjointSets = new DisjointSets(this.verticesNum);
+        this.neighbourNodes = new ArrayList<>(this.verticesNum);
     }
 
     private void generateGraph(){
@@ -117,11 +118,15 @@ public class Graph {
         int source = 1;
         while (source<=this.nodes.size()-1){
             int destination = source+1;
+            List<Node> neighbors = new ArrayList<>();
             while (destination<=this.nodes.size()) {
                 Edge edge = generateEdge(source, destination);
+                Node neighborNode = new Node(destination,edge.getWeight());
+                neighbors.add(neighborNode);
                 this.graphEdges.add(edge);
                 destination++;
             }
+            this.neighbourNodes.add(source-1,neighbors);
             source++;
         }
         printList(this.graphEdges);
@@ -257,5 +262,13 @@ public class Graph {
 
     public void setSteinerNodes(List<Integer> steinerNodes) {
         this.steinerNodes = steinerNodes;
+    }
+
+    public List<List<Node>> getNeighbourNodes() {
+        return neighbourNodes;
+    }
+
+    public void setNeighbourNodes(List<List<Node>> neighbourNodes) {
+        this.neighbourNodes = neighbourNodes;
     }
 }
