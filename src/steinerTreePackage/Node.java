@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Node implements Comparator<Node>,Comparable<Node> {
-    private List<Edge> edges;
+    private List<Edge> edges = new ArrayList<>();
 
-    private List<Node> children;
+    private List<Node> children = new ArrayList<>();
 
-    private List<Node> connectedNodes;
+    private List<Node> connectedNodes = new ArrayList<>();
 
     private Node parent;
 
@@ -139,6 +139,14 @@ public class Node implements Comparator<Node>,Comparable<Node> {
 
     public String toString() {
         return "Node " + this.V + " -> Children: " + this.children.stream().map(n -> Integer.toString(n.getV())).collect(Collectors.joining(", "))+"\t"+"Parent: "+(this.getParent()==null?"None":this.getParent().getV());
+    }
+
+//    @Override
+    public String toString2() {
+        return "Node{" +
+                "V=" + V +
+                ", cost=" + cost +
+                '}';
     }
 
     @Override

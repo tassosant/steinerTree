@@ -97,8 +97,10 @@ public class GFG {
     }
 
     // Main driver method
-    public List<Edge> calculate(List<List<Node>> adj, int V, int[] source)
+//    public List<Edge> calculate(Graph graph, int V, List<Integer> source)
+    public List<Edge> calculate(List<List<Node>> adj, int V, List<Integer> source)
     {
+
         List<Edge> edges = new ArrayList<>();
         for (int k : source) {
             // Calculating the single source the shortest path
@@ -109,23 +111,15 @@ public class GFG {
             // from the source node
             System.out.println("The shorted path from node "+k+":");
 
-//            for (int i = 0; i < dpq.dist.length; i++) {
-//                System.out.println(k + " to " + i + " is "
-//                        + dpq.dist[i]);
-//            }
             for (int steinerNode : source) {
                 Edge edge = new Edge(k,steinerNode,dpq.dist[steinerNode]);
                 System.out.println(k + " to " + steinerNode + " is "
                         + dpq.dist[steinerNode]);
                 System.out.println(edge.toString());
                 edges= addUniqueEdges(edges, edge);
-//                edges.add(edge);
 
             }
-
-
         }
-
         return edges;
     }
 

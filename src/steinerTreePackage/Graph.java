@@ -8,7 +8,7 @@ public class Graph {
     private List<Edge> graphEdges;
     private List<Integer> nodes;
     private List<Integer> steinerNodes;
-    private List<List<Node>> neighbourNodes;
+    private List<List<Node>> adj;
     private List<Edge> minimumSpanningTree;
 
     private DisjointSets disjointSets;
@@ -42,7 +42,7 @@ public class Graph {
         this.steinerNodes = new ArrayList<>();
         this.minimumSpanningTree = new ArrayList<>();
         this.disjointSets = new DisjointSets(this.verticesNum);
-        this.neighbourNodes = new ArrayList<>(this.verticesNum);
+//        this.neighbourNodes = new ArrayList<>(this.verticesNum);
     }
 
     private void generateGraph(){
@@ -77,7 +77,10 @@ public class Graph {
 
 
     private int generateRandomInRangeExceptForOne(int min, int max, int exception){
-        Random random = new Random();
+        // to run unit tests comment out the next line
+         Random random = new Random(1);
+        // to run actual random comment out the next line
+        // Random random = new Random(0);
         int randomInt;
         do {
             randomInt = random.nextInt(max-min+1)+min;
@@ -88,7 +91,10 @@ public class Graph {
     }
 
     private int generateRandomInRange(int min,int max){
-        Random random = new Random();
+        // to run unit tests comment out the next line
+        Random random = new Random(1);
+        // to run actual random comment out the next line
+        // Random random = new Random(0);
         return random.nextInt(max-min+1)+min;
     }
 
@@ -118,18 +124,40 @@ public class Graph {
         int source = 1;
         while (source<=this.nodes.size()-1){
             int destination = source+1;
-            List<Node> neighbors = new ArrayList<>();
+//            List<Node> neighbors = new ArrayList<>();
             while (destination<=this.nodes.size()) {
                 Edge edge = generateEdge(source, destination);
                 Node neighborNode = new Node(destination,edge.getWeight());
-                neighbors.add(neighborNode);
+//                neighbors.add(neighborNode);
                 this.graphEdges.add(edge);
                 destination++;
             }
-            this.neighbourNodes.add(source-1,neighbors);
+//            this.neighbourNodes.add(source-1,neighbors);
             source++;
         }
         printList(this.graphEdges);
+    }
+
+    public List<List<Node>> getAdjacency(){
+        List<List<Node>> a = new ArrayList<>();
+        for (Integer node: nodes){
+            List<Node> list = new ArrayList<>();
+            for (Edge edge : graphEdges){
+                if (edge.getSource()==node){
+                    Node n = new Node(edge.getDestination(), edge.getWeight());
+                    list.add(n);
+                }
+                if (edge.getDestination()==node){
+                    Node n = new Node(edge.getSource(), edge.getWeight());
+                    list.add(n);
+                }
+            }
+            a.add(node-1,list);
+        }
+
+        this.adj = a;
+
+        return a;
     }
 
     private void generateRandomEdges(int min, int max, int source){
@@ -264,11 +292,19 @@ public class Graph {
         this.steinerNodes = steinerNodes;
     }
 
-    public List<List<Node>> getNeighbourNodes() {
-        return neighbourNodes;
+    public List<List<Node>> getAdj() {
+//        System.out.println(neighbourNodes.toString());
+        return adj;
     }
 
-    public void setNeighbourNodes(List<List<Node>> neighbourNodes) {
-        this.neighbourNodes = neighbourNodes;
+    public void printAdj(){
+        for (int i=0; i<adj.size(); i++){
+            int node = i+1;
+            System.out.println("for node "+node+" the adj are:");
+//            int size = adj.get(i).size();
+//            for ( int j=0; j < size; j++){
+                System.out.println(adj.get(i).toString());
+//            }
+        }
     }
 }

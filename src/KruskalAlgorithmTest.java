@@ -63,7 +63,7 @@ public void applyKruskalTest1(){
             edge.setSource(edge.getSource()+1);
             edge.setDestination(edge.getDestination()+1);
         }));
-        Collections.sort(graph1);
+//        Collections.sort(graph1);
         Graph graph = new Graph();
         List<Edge> actual =  graph.applyKruskal(graph1,new DisjointSets(5));
         List<Edge> expected =new ArrayList<>();

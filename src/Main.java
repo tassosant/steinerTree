@@ -1,5 +1,6 @@
-import steinerTreePackage.Graph;
-import steinerTreePackage.SteinerTree;
+import steinerTreePackage.*;
+
+import java.util.List;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -7,8 +8,23 @@ public class Main {
     public static void main(String[] args) {
 
         Graph graph = new Graph(6);
+        List<List<Node>> adj = graph.getAdjacency();
+        for (List<Node> list:adj){
+            for (Node node:list){
+                node.setV(node.getV()-1);
+            }
+        }
+        graph.printAdj();
 
-        SteinerTree steinerTree = new SteinerTree(graph.getDisjointSets().getParent()[0],graph.getNodes(),graph.getSteinerNodes(),graph.getMinimumSpanningTree());
+        List<Integer> source = graph.getSteinerNodes();
+        source.forEach(System.err::println);
+        GFG gfg = new GFG();
+        List<Edge> graphB = gfg.calculate(adj, 6, source);
+        Graph g = new Graph();
+        List<Edge> graphC =  g.applyKruskal(graphB,new DisjointSets(6));
+
+
+       // SteinerTree steinerTree = new SteinerTree(graph.getDisjointSets().getParent()[0],graph.getNodes(),graph.getSteinerNodes(),graph.getMinimumSpanningTree());
 
 
 
