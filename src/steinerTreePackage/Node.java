@@ -111,6 +111,10 @@ public class Node implements Comparator<Node>,Comparable<Node> {
         return connectedNodes;
     }
 
+    public void setParent(Node parent) {
+        this.parent = parent;
+    }
+
     // Method 1
     @Override
     public int compare(Node node1, Node node2)

@@ -27,6 +27,7 @@ public class Graph {
         Arrays.stream(this.disjointSets.getRank()).forEach((rank)->{
             System.out.print(rank+" ");
         });
+        System.out.println();
 
     }
 

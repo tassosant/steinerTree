@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="534844cc-c3cd-4dd1-b107-49806bb9028d" name="Changes" comment="Synced">
-      <change afterPath="$PROJECT_DIR$/src/SteinerTreeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/steinerTreePackage/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/steinerTreePackage/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/steinerTreePackage/SteinerTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steinerTreePackage/SteinerTree.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +72,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.SteinerTreeTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="steinerTree" />
@@ -122,8 +120,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SteinerTreeTest" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.GFGTest" />
         <item itemvalue="JUnit.KruskalAlgorithmTest.applyKruskalTestTasos" />
         <item itemvalue="JUnit.KruskalAlgorithmTest.applyKruskalTest2" />
@@ -148,7 +146,7 @@
       <workItem from="1708792806832" duration="7555000" />
       <workItem from="1708878470919" duration="8660000" />
       <workItem from="1708904238848" duration="697000" />
-      <workItem from="1708928014594" duration="20227000" />
+      <workItem from="1708928014594" duration="22871000" />
     </task>
     <task id="LOCAL-00001" summary="Generated Graph&#10;Apply kruskal is disabled, not completed yet">
       <created>1708817911248</created>
@@ -194,9 +192,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/steinerTreePackage/SteinerTree.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/src/SteinerTreeTest.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

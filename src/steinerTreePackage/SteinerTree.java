@@ -27,7 +27,7 @@ public class SteinerTree {
         parseIntNodesToNodesList(this.steinerNodesInt,this.steinerNodes);
         mapNodes(this.MST,this.nodes);
         makeNodesRelationship(this.nodes);
-        printTree();
+//        printTree();
     }
 
     private void initProperties(){
@@ -79,10 +79,15 @@ public class SteinerTree {
     private void makeNodeRelationship(List<Node> nodes,Node currentNode){
         List<Node> connectedNodes = currentNode.getConnectedNodes();
         connectedNodes.forEach(connectedNode -> {
-            currentNode.addChild(connectedNode.getV());
-            connectedNode.addParent(currentNode.getV());
-            makeNodeRelationship(nodes,connectedNode);
+            connectedNode.addParent(currentNode);
+            currentNode.addChildNode(connectedNode);
         });
+        currentNode.getChildren().forEach((child)->{
+            makeNodeRelationship(nodes,child);
+        });
+
+
+
     }
 
 
@@ -94,7 +99,7 @@ public class SteinerTree {
         this.root = root;
     }
 
-    private void printTree(){
+    public void printTree(){
         this.nodes.forEach((System.out::println));
     }
 
