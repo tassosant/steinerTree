@@ -1,6 +1,7 @@
 package steinerTreePackage;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Graph {
 
@@ -22,6 +23,11 @@ public class Graph {
         generateGraph();
         this.minimumSpanningTree = applyKruskal(this.graphEdges,this.disjointSets);
         printEdgesWithWeights(this.minimumSpanningTree);
+        System.out.println("Root:"+(this.disjointSets.getParent()[0]+1));
+        Arrays.stream(this.disjointSets.getRank()).forEach((rank)->{
+            System.out.print(rank+" ");
+        });
+
     }
 
     public Graph() {
@@ -39,7 +45,8 @@ public class Graph {
     private void generateGraph(){
         //firstly generate nodes
         generateNodes(this.verticesNum);
-        pickRandomlySteinerNodes(1,this.verticesNum,0);
+        pickRandomlySteinerNodes(1,this.verticesNum);
+        Collections.sort(this.steinerNodes);
         printList(this.steinerNodes,"Steiner nodes before sort");
         generateEdges(0,0);
 //        generateRandomEdges(1,(this.verticesNum*(this.verticesNum-1))/2,1);
@@ -89,16 +96,16 @@ public class Graph {
     //6     x
     //x=percentage*6/100
 
-    private void pickRandomlySteinerNodes(int min,int max, int exceptNode){
-        int node = generateRandomInRangeExceptForOne(min,max,exceptNode);
+    private void pickRandomlySteinerNodes(int min,int max){
+        int node = generateRandomInRange(min,max);
         if(this.steinerNodes.size()+1<=(70*this.nodes.size())/100) {
             this.steinerNodes.add(this.nodes.get(node-1));
         }
         if(node!=min){
-            pickRandomlySteinerNodes(min,node-1,node);
+            pickRandomlySteinerNodes(min,node-1);
         }
         if(node!=max){
-            pickRandomlySteinerNodes(node + 1, max, node);
+            pickRandomlySteinerNodes(node + 1, max);
         }
 
     }
@@ -177,6 +184,7 @@ public class Graph {
 
     public List<Edge> applyKruskal(List<Edge> edgesList, DisjointSets disjointSets){
         List<Edge> minimumSpanningTree = new ArrayList<>();
+        Map<Integer,Node> nodeMap = new TreeMap<>();
         edgesList.forEach((edge)->{
                 //int source = edge.getSource()-1; //index for parent array and rank array
                 //int destination = edge.getDestination()-1; //index
@@ -185,11 +193,22 @@ public class Graph {
                 if(disjointSets.find(source)!=disjointSets.find(destination)){
                     disjointSets.union(source,destination);
                     minimumSpanningTree.add(edge);
+
+                    nodeMap.putIfAbsent(source+1,new Node(source+1));
+                    nodeMap.putIfAbsent(destination+1,new Node(destination+1));
 //                    System.out.println("Edge added");
+
+                    nodeMap.get(source+1).addChildNode(nodeMap.get(destination+1));
+//                    nodeMap.get(destination+1).addChildNode(nodeMap.get(source+1));
                 }else{
 //                    System.out.println("This performs a cycle");
                 }
         });
+        nodeMap.forEach((id, node) -> {
+            System.out.println(node);
+        });
+
+
         return minimumSpanningTree;
 
     }
@@ -205,7 +224,19 @@ public class Graph {
         System.out.println("-----------------------------------");
     }
 
+    public List<Integer> getNodes() {
+        return nodes;
+    }
 
+    public List<Integer> getSteinerNodes() {
+        return steinerNodes;
+    }
 
+    public List<Edge> getMinimumSpanningTree() {
+        return minimumSpanningTree;
+    }
 
+    public DisjointSets getDisjointSets() {
+        return disjointSets;
+    }
 }
