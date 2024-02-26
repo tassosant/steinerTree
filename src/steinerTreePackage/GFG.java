@@ -97,19 +97,50 @@ public class GFG {
     }
 
     // Main driver method
-    public void calculate(List<List<Node>> adj, int V, int source)
+    public List<Edge> calculate(List<List<Node>> adj, int V, int[] source)
     {
-        // Calculating the single source the shortest path
-        GFG dpq = new GFG(V);
-        dpq.dijkstra(adj, source);
+        List<Edge> edges = new ArrayList<>();
+        for (int k : source) {
+            // Calculating the single source the shortest path
+            GFG dpq = new GFG(V);
+            dpq.dijkstra(adj, k);
 
-        // Printing the shortest path to all the nodes
-        // from the source node
-        System.out.println("The shorted path from node :");
+            // Printing the shortest path to all the nodes
+            // from the source node
+            System.out.println("The shorted path from node "+k+":");
 
-        for (int i = 0; i < dpq.dist.length; i++)
-            System.out.println(source + " to " + i + " is "
-                    + dpq.dist[i]);
+//            for (int i = 0; i < dpq.dist.length; i++) {
+//                System.out.println(k + " to " + i + " is "
+//                        + dpq.dist[i]);
+//            }
+            for (int steinerNode : source) {
+                Edge edge = new Edge(k,steinerNode,dpq.dist[steinerNode]);
+                System.out.println(k + " to " + steinerNode + " is "
+                        + dpq.dist[steinerNode]);
+                System.out.println(edge.toString());
+                edges= addUniqueEdges(edges, edge);
+//                edges.add(edge);
+
+            }
+
+
+        }
+
+        return edges;
     }
+
+    public List<Edge> addUniqueEdges(List<Edge> edges, Edge edge){
+        if (edge.getDestination()==edge.getSource()){
+            return edges;
+        }
+       for (Edge e:edges){
+           if (e.getDestination()==edge.getSource() && e.getSource()==edge.getDestination()){
+               return edges;
+           }
+       }
+       edges.add(edge);
+       return edges;
+    }
+
 
 }
